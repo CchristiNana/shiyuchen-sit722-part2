@@ -1,0 +1,24 @@
+apiVersion: apps/v1                       # Specifies the Kubernetes API version for deployments
+kind: Deployment                          # Defines the resource type as a Deployment
+metadata:
+  name: book-catalog                      # Name of the deployment
+  labels:                                 # Key-value pairs to categorize resources
+    app: book-catalog
+spec:
+  replicas: 1                             # Number of pod replicas (instances) to run
+  selector:
+    matchLabels:
+      app: book-catalog                   # Ensures the pods created by the deployment are tracked with this label
+  template:                               # Defines the template for the pods that will be created
+    metadata:
+      labels:
+        app: book-catalog                 # Labels for the created pods
+    spec:
+      containers:
+      - name: book-catalog-container      # Name of the container
+        image: christinachensy/task62part2:latest  # Docker image to use for the container
+        ports:
+        - containerPort: 5000             # The port that the container exposes
+        env:                              # Environment variables for the container
+        - name: DATABASE_URL              # An example of how to pass environment variables 
+          value: "postgresql://sit722_part2_7dlm_user:Y693jRWbN2hYF6J49c1lTMrLg4X7CTx4@dpg-crh7mdt6l47c73c3n3fg-a.oregon-postgres.render.com/sit722_part2_7dlm" 
